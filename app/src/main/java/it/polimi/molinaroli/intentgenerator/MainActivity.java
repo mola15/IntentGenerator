@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 //input.setInputType(InputType.TYPE_TEXT_VARIATION_URI);
                 builder.setView(input);
 
+
                 // Set up the buttons
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
