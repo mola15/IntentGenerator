@@ -14,6 +14,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Set;
+
 import static java.net.Proxy.Type.HTTP;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,12 +26,12 @@ public class MainActivity extends AppCompatActivity {
     Button mail;
     Button web;
     Button photo;
+    Button geo;
     Context c;
     private String m_Text = "";
     private String sTo = "";
     private String sObject = "";
     private String sText = "";
-
 
 
     @Override
@@ -36,7 +41,9 @@ public class MainActivity extends AppCompatActivity {
         mail = (Button) findViewById(R.id.mailIntent);
         web = (Button) findViewById(R.id.webIntent);
         photo = (Button) findViewById(R.id.photoIntent);
-        c=this;
+        c = this;
+
+        geo = (Button) findViewById(R.id.geoIntent);
     }
 
     @Override
@@ -49,9 +56,11 @@ public class MainActivity extends AppCompatActivity {
 
         preparePhoto();
 
+        prepareGeo();
+
     }
 
-    public void prepareWeb(){
+    public void prepareWeb() {
         web.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void preparePhoto(){
+    public void preparePhoto() {
         photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void prepareMail(){
+    public void prepareMail() {
         final LayoutInflater inflater = getLayoutInflater();
         mail.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,4 +183,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void prepareGeo() {
+        geo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("geo:37.7749,-122.4194"));
+                String title = "Open map with:";
+                // Create intent to show the chooser dialog
+                Intent chooser = Intent.createChooser(intent, title);
+
+                // Verify the original intent will resolve to at least one activity
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(chooser);
+                }
+            }
+        });
+    }
+
+
 }
