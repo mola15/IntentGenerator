@@ -155,9 +155,10 @@ public class MainActivity extends AppCompatActivity {
                         //a questo punto posso costruire l'intento per inviare la mail
 
 
-                        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
                         emailIntent.setType("text/html");
                         // The intent does not have a URI, so declare the "text/plain" MIME type
+                        emailIntent.setData(Uri.parse("mailto:")); // only email apps should handle this
                         emailIntent.putExtra(Intent.EXTRA_EMAIL, sTo); // recipients
                         emailIntent.putExtra(Intent.EXTRA_SUBJECT, sObject);
                         emailIntent.putExtra(Intent.EXTRA_TEXT, sText);
